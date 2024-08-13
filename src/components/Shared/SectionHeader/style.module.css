@@ -1,0 +1,20 @@
+.section_header {
+  width: 100%;
+  min-height: 40vh;
+  background-image: url("https://images.pexels.com/photos/5863395/pexels-photo-5863395.jpeg?auto=compress&cs=tinysrgb&w=600");
+  
+}
+
+.header_title {
+  background-color: #f04336; /* Red background color */
+  color: white; /* White text color */
+  border: none; /* No border */
+  padding: 5px 20px; /* Padding around the text */
+  text-align: center; /* Center text */
+  text-decoration: none; /* No underline */
+  display: inline-block; /* Inline-block display */
+  font-size: 16px; /* Font size */
+  border-radius: 10px 10px 20px 20px; /* Rounded top corners */
+  clip-path: polygon(0 0, 100% 0, 96% 100%, 0% 100%); /* Clip path value */
+  font-family: Arial, sans-serif; /* Font family */
+}
