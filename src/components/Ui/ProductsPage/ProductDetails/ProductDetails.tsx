@@ -14,6 +14,10 @@ const ProductDetails = ({
   company,
   photos,
 }: IProduct) => {
+
+  console.log("variants", variants);
+  
+
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const [qty, setQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(price);

@@ -17,15 +17,13 @@ const ProductSection = () => {
     );
   }
 
-  console.log("products", products);
-
   return (
     <div className="font-[sans-serif] py-4 mx-auto lg:max-w-6xl max-w-lg md:max-w-full">
       <h2 className="text-4xl text-center font-extrabold text-gray-800 mb-12">
         MediMart Products
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {(products?.data as IProduct[])?.map((product: IProduct) => (
+        {products?.data?.map((product: IProduct) => (
           <ProductCard key={product._id} {...product} />
         ))}
       </div>

@@ -33,27 +33,35 @@ instance.interceptors.response.use(
   function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
-    const responseObject: ResponseSuccessType = {
+    const responseObject: any = {
+      success: response?.data?.success,
+      statusCode: response?.data?.statusCode,
+      message: response?.data?.message,
       data: response?.data?.data,
       meta: response?.data?.meta,
     };
 
     console.log("response from axiosInstance", responseObject);
 
-    return responseObject;
+    return response;
   },
   async function (error: any) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     // console.log(error);
     const config = error.config;
+
+    console.log("error from axiosInstance", error);
+
     // console.log(config);
-    if (error?.response?.status === 401 && !config.sent) {
+    if (error?.response?.statusCode === 401 && !config.sent) {
       config.sent = true;
       const response = (await getNewAccessToken()) as any;
       console.log("response from axiosInstance", response);
 
       const accessToken = response?.data?.token;
+      console.log("new access token", accessToken);
+
       config.headers["Authorization"] = accessToken;
       setToLocalStorage(authKey, accessToken);
       setAccessToken(accessToken);

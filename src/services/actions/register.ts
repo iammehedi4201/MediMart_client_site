@@ -4,7 +4,7 @@ export const registerUser = async (userInfo: TRegisterUser) => {
   console.log("userInfo", userInfo);
 
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/create-user`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/create-user`,
     {
       method: "POST",
       headers: {

@@ -1,8 +1,5 @@
-import { removeFromCart } from "@/redux/api/cart/cartSlice";
 import { useAppDispatch } from "@/redux/hook";
-import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import { useSelector } from "react-redux";
 import CartItemCard from "../CartItemCard/CartItemCard";
 
@@ -12,9 +9,7 @@ const CartCard = () => {
   const totalPrice = useSelector((state: any) => state.cart.totalPrice);
   const dispatch = useAppDispatch();
 
-  console.log("cartItems", cartItems);
 
-  console.log("totalPrice", totalPrice);
 
   
 

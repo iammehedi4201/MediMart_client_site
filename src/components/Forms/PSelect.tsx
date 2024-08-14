@@ -13,6 +13,7 @@ interface ITextField {
   fullWidth?: boolean;
   sx?: SxProps;
   options: Titems[];
+  multiple?: boolean;
 }
 
 const PSelectField = ({
@@ -46,7 +47,7 @@ const PSelectField = ({
         >
           {options?.map((option: Titems) => (
             <MenuItem key={option.value} value={option.value}>
-              {option.value}
+              {option.label}
             </MenuItem>
           ))}
         </TextField>

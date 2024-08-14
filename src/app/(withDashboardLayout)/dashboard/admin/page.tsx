@@ -1,6 +1,3 @@
-import Image from "next/image";
-import ManageUsersPage from "./manageUsers/page";
-
 const AdminHome = () => {
   return (
     <div>
@@ -489,7 +486,7 @@ const AdminHome = () => {
       </div>
 
       {/* <!-- Client Table --> */}
-      <ManageUsersPage showSectionHeader={true} />
+      {/* <ManageUsersPage showSectionHeader={true} /> */}
     </div>
   );
 };

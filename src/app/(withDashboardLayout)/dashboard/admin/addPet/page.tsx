@@ -9,7 +9,7 @@ import {
   petSizeOptions,
   petTemperamentOptions,
 } from "@/constant/pet";
-import { useAddPetMutation } from "@/redux/api/pet/petApi";
+
 import { uploadImgToIMGBB } from "@/utils/uploadImgToIMGBB";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, Button, Tooltip } from "@mui/material";
@@ -98,7 +98,7 @@ const AddPetPage = () => {
   const router = useRouter();
 
   //: add pet mutation
-  const [addPet] = useAddPetMutation();
+  // const [addPet] = useAddPetMutation();
 
   //:File state
   const [files, setFiles] = useState<any>([]);
@@ -119,10 +119,10 @@ const AddPetPage = () => {
       };
       console.log("petInfo", petInfo);
       //: Add Pet
-      const response = await addPet(petInfo).unwrap();
+      // const response = await addPet(petInfo).unwrap();
       //: Check if response is successful
 
-      toast.error(response?.message, { id: toastId, duration: 3000 });
+      // toast.error(response?.message, { id: toastId, duration: 3000 });
     } catch (error: any) {
       error?.data?.err?.name === "ZodError"
         ? toast.error(error?.data?.message, { id: toastId, duration: 3000 })

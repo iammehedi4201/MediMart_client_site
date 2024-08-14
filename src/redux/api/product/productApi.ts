@@ -2,6 +2,17 @@ import { baseApi } from "../baseApi";
 
 const petApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    createProduct: builder.mutation({
+      query: (data) => {
+        console.log("productInfo", data);
+        return {
+          url: `product/create-product`,
+          method: "POST",
+          data,
+        };
+      },
+      invalidatesTags: ["product"],
+    }),
     getAllProducts: builder.query({
       query: (query) => {
         // const params = new URLSearchParams();
@@ -16,10 +27,10 @@ const petApi = baseApi.injectEndpoints({
           //   params: params,
         };
       },
-      transformResponse: (data, meta) => {
+      transformResponse: (response: any) => {
         return {
-          data,
-          meta,
+          data: response.data,
+          meta: response.meta,
         };
       },
       providesTags: [],

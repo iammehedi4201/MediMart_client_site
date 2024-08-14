@@ -13,13 +13,17 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
-import { useAppDispatch } from "@/redux/hook";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import CartViewDrawer from "@/components/Ui/Cart/CartViewDrawer/CartViewDrawer";
 import { toggleCartDrawer } from "@/redux/api/cart/cartSlice";
 
 const Navbar = () => {
   const router = useRouter();
   const userInfo = getUserInfo();
+  const cartItems = useAppSelector((state) => state.cart.cartItems);
+
+  console.log("userInfo", userInfo);
+
   const dispatch = useAppDispatch();
   //: Dynamic import for AuthButton and UserProfile
   const AuthButtonComponent = dynamic(
@@ -109,9 +113,14 @@ const Navbar = () => {
                   onClick={() => {
                     dispatch(toggleCartDrawer(true));
                   }}
+                  className="relative p-2 bg-white border border-gray-300 rounded-full hover:bg-gray-100 transition duration-300"
                 >
-                  {" "}
                   <LocalMallIcon className="text-[#f04336]" />
+                  {cartItems.length > 0 && (
+                    <span className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-[#f04336] text-white rounded-full text-xs w-6 h-6 flex items-center justify-center border-2 border-white">
+                      {cartItems.length}
+                    </span>
+                  )}
                 </button>
 
                 {/* Cart Drawer */}
@@ -204,7 +213,13 @@ const Navbar = () => {
               {userInfo && (
                 <li>
                   <Link
-                    href={`/dashboard/${userInfo?.role}/`}
+                    href={`/dashboard/${
+                      userInfo.role === "Super_Admin"
+                        ? "admin"
+                        : userInfo.role === "admin"
+                        ? "admin"
+                        : "user"
+                    }`}
                     className="block py-2 pl-3 pr-4 text-black rounded  hover:text-orange-500 "
                   >
                     Dashboard

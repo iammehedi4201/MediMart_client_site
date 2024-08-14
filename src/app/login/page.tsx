@@ -25,8 +25,8 @@ interface DefaultValues {
 
 // Default Values
 const defaultValues: DefaultValues = {
-  email: "",
-  password: "",
+  email: "iammehedi296@gmail.com",
+  password: "Hasan586258",
 };
 
 const LoginPage = () => {

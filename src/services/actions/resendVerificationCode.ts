@@ -2,7 +2,7 @@
 
 export const resendVerificationCode = async (email: string) => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/request-verification-code`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/request-verification-code`,
     {
       method: "POST",
       headers: {

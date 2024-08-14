@@ -18,7 +18,11 @@ const CategorySection = () => {
   } = useGetAllCategoriesQuery(undefined);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="min-h-screen w-full flex justify-center items-center">
+        <div className="w-20 h-20 border-t-4 border-b-4 border-[#f04336] rounded-full animate-spin"></div>
+      </div>
+    );
   }
 
   return (
@@ -39,7 +43,7 @@ const CategorySection = () => {
           modules={[Pagination]}
           className="mySwiper"
         >
-          {categories?.map((category: ICategory) => (
+          {categories?.data?.map((category: ICategory) => (
             <SwiperSlide key={category._id}>
               <CategorySlider {...category} />
             </SwiperSlide>

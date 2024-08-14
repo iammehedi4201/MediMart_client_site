@@ -5,6 +5,9 @@ export type IMeta = {
 };
 
 export type ResponseSuccessType = {
+  success: boolean;
+  statusCode: number;
+  message: string;
   data: any;
   meta?: IMeta;
 };

@@ -12,9 +12,10 @@ const userApi = baseApi.injectEndpoints({
       providesTags: ["user"],
     }),
     getMyProfile: builder.query({
-      query: () => {
+      query: (query) => {
+        console.log("Query", query);
         return {
-          url: "/profile",
+          url: `/user/get-user-profile?email=${query}`,
           method: "GET",
         };
       },

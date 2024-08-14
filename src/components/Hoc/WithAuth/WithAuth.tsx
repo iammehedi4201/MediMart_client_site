@@ -7,7 +7,7 @@ const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
   const userInfo = getUserInfo();
   if (!userInfo) {
     router.push("/login");
-    return '';
+    return "";
   }
 
   return <>{children}</>;

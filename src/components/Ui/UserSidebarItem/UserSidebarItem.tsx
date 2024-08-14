@@ -5,7 +5,7 @@ const UserSidebarItem = () => {
   const userInfo = getUserInfo();
   return (
     <>
-      {userInfo?.role === "user" && (
+      {userInfo?.role === "User" && (
         <ul className="flex flex-col py-4 space-y-1">
           <li className="px-5 hidden md:block">
             <div className="flex flex-row items-center h-8">

@@ -17,13 +17,22 @@ const UserProfile = () => {
   const userInfo = getUserInfo();
   const router = useRouter();
 
+  console.log("userInfo", userInfo);
+
   //:get user Profile
-  const { data: profile, isLoading } = useGetMyProfileQuery(undefined);
+  const {
+    data: profile,
+    isLoading,
+  } = useGetMyProfileQuery(userInfo?.email);
 
   console.log("profile", profile);
-  
 
   const [isUSerMenuOpen, setIsUserMenuOpen] = useState(false); //for profile menu toggle
+
+  //loading
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   const handleOpenUserMenu = () => {
     setIsUserMenuOpen(!isUSerMenuOpen);
