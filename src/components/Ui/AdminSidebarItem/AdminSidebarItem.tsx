@@ -7,6 +7,10 @@ import PetsSharpIcon from "@mui/icons-material/PetsSharp";
 import RequestPageIcon from "@mui/icons-material/RequestPage";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
+import CategoryIcon from "@mui/icons-material/Category";
+import TopicIcon from "@mui/icons-material/Topic";
+import ClassIcon from "@mui/icons-material/Class";
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 
 const AdminSidebarItem = () => {
   const userInfo = getUserInfo();
@@ -32,32 +36,6 @@ const AdminSidebarItem = () => {
                 </span>
                 <span className="ml-2 text-md tracking-wide truncate font-bold ">
                   Dashboard
-                </span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/dashboard/admin/manageUsers"
-                className="relative flex flex-row items-center h-11 focus:outline-none text-white-600 hover:text-white-800  border-r-4 border-transparent hover:border-[#f04336] hover:bg-orange-50 pr-6"
-              >
-                <span className="inline-flex justify-center items-center ml-4 mb-1">
-                  <Person />
-                </span>
-                <span className="ml-2 text-md tracking-wide truncate font-bold">
-                  Manage Users
-                </span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/dashboard/admin/addPet "
-                className="relative flex flex-row items-center h-11 focus:outline-none text-white-600 hover:text-white-800  border-r-4 border-transparent hover:border-[#f04336] hover:bg-orange-50 pr-6"
-              >
-                <span className="inline-flex justify-center items-center ml-4 mb-1">
-                  <AddBoxIcon />
-                </span>
-                <span className="ml-2 text-md tracking-wide truncate font-bold">
-                  Add Pet
                 </span>
               </Link>
             </li>
@@ -102,11 +80,24 @@ const AdminSidebarItem = () => {
             </li>
             <li>
               <Link
+                href="/dashboard/admin/manageUsers"
+                className="relative flex flex-row items-center h-11 focus:outline-none text-white-600 hover:text-white-800  border-r-4 border-transparent hover:border-[#f04336] hover:bg-orange-50 pr-6"
+              >
+                <span className="inline-flex justify-center items-center ml-4 mb-1">
+                  <Person />
+                </span>
+                <span className="ml-2 text-md tracking-wide truncate font-bold">
+                  Manage Users
+                </span>
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/dashboard/admin/manageProducts"
                 className="relative flex flex-row items-center h-11 focus:outline-none text-white-600 hover:text-white-800  border-r-4 border-transparent hover:border-[#f04336] hover:bg-orange-50 pr-6"
               >
                 <span className="inline-flex justify-center items-center ml-4 mb-1">
-                  <PetsSharpIcon />
+                  <TopicIcon />
                 </span>
                 <span className="ml-2 text-md tracking-wide truncate font-bold">
                   Manage Products
@@ -119,10 +110,36 @@ const AdminSidebarItem = () => {
                 className="relative flex flex-row items-center h-11 focus:outline-none text-white-600 hover:text-white-800  border-r-4 border-transparent hover:border-[#f04336] hover:bg-orange-50 pr-6"
               >
                 <span className="inline-flex justify-center items-center ml-4 mb-1">
-                  <RequestPageIcon />
+                  <CategoryIcon />
                 </span>
                 <span className="ml-2 text-md tracking-wide truncate font-bold">
                   Manage Categories
+                </span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/dashboard/admin/manageVarients"
+                className="relative flex flex-row items-center h-11 focus:outline-none text-white-600 hover:text-white-800  border-r-4 border-transparent hover:border-[#f04336] hover:bg-orange-50 pr-6"
+              >
+                <span className="inline-flex justify-center items-center ml-4 mb-1">
+                  <ClassIcon />
+                </span>
+                <span className="ml-2 text-md tracking-wide truncate font-bold">
+                  Manage Varients
+                </span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/dashboard/admin/manageOrders"
+                className="relative flex flex-row items-center h-11 focus:outline-none text-white-600 hover:text-white-800  border-r-4 border-transparent hover:border-[#f04336] hover:bg-orange-50 pr-6"
+              >
+                <span className="inline-flex justify-center items-center ml-4 mb-1">
+                  <LocalOfferIcon />
+                </span>
+                <span className="ml-2 text-md tracking-wide truncate font-bold">
+                  Manage Orders
                 </span>
               </Link>
             </li>

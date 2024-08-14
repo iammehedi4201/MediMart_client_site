@@ -30,26 +30,27 @@ const petApi = baseApi.injectEndpoints({
       },
       providesTags: ["varient"],
     }),
-    // updatePetById: builder.mutation({
-    //   query: (data) => {
-    //     console.log("petInfo", data);
-    //     return {
-    //       url: `/product/${data?.id}`,
-    //       method: "PUT",
-    //       contentType: "application/json",
-    //       data: data?.petInfo,
-    //     };
-    //   },
-    //   invalidatesTags: [],
-    // }),
-    // DeletePetById: builder.mutation({
-    //   query: (id: string) => {
-    //     return {
-    //       url: `/product/${id}`,
-    //       method: "DELETE",
-    //     };
-    //   },
-    // }),
+    updateVarientById: builder.mutation({
+      query: (data) => {
+        console.log("petInfo", data);
+        return {
+          url: `/varient/update-varients/${data?.id}`,
+          method: "PUT",
+          contentType: "application/json",
+          data: data?.updatedInfo,
+        };
+      },
+      invalidatesTags: ["varient"],
+    }),
+    DeleteVarientById: builder.mutation({
+      query: (id: string) => {
+        return {
+          url: `/varient/delete-varients/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["varient"],
+    }),
   }),
 });
 
@@ -57,4 +58,6 @@ export const {
   useGetAllVarientsQuery,
   useGetVarientByIdQuery,
   useCreateVarientMutation,
+  useUpdateVarientByIdMutation,
+  useDeleteVarientByIdMutation,
 } = petApi;
