@@ -2,7 +2,7 @@ import { MenuItem, SxProps, TextField } from "@mui/material";
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
-type Titems = { label: string; value: string };
+type Titems = { label: string; value: any };
 
 interface ITextField {
   name: string;

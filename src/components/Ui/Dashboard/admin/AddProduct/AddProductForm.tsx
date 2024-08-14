@@ -11,6 +11,7 @@ import {
   petTemperamentOptions,
 } from "@/constant/pet";
 import { useGetAllCategoriesQuery } from "@/redux/api/category/categoryApi";
+import { useCreateProductMutation } from "@/redux/api/product/productApi";
 import { useGetAllVarientsQuery } from "@/redux/api/varients/varientsApi";
 import { ICategory } from "@/types";
 
@@ -27,26 +28,47 @@ import { z } from "zod";
 const addProductValidationSchema = z.object({});
 
 // type for product
-type Product = {};
-
-// Default Values
 type DefaultValues = {
-  product: Product;
+  name: string;
+  slug: string;
+  metaKey: string;
+  price: number;
+  discount: number;
+  company: string;
+  quantity: number;
+  categories: string[];
+  variants: string[];
+  description: string;
+  photos: string[];
 };
 
 //: Default Values
 const defaultValues: DefaultValues = {
-  product: {},
+  name: "",
+  slug: "",
+  metaKey: "",
+  price: 0,
+  discount: 0,
+  company: "",
+  quantity: 0,
+  categories: [],
+  variants: [],
+  description: "",
+  photos: [],
 };
 const AddProductForm = () => {
-  //: router
+  // router
   const router = useRouter();
 
-  //:File state
+  //File state
   const [files, setFiles] = useState<any>([]);
+
+  // create product
+  const [createProduct] = useCreateProductMutation();
 
   // get all product categories
   const { data: categories, isLoading } = useGetAllCategoriesQuery(undefined);
+
   const productCategoryOptions = categories?.data?.map(
     (category: ICategory) => ({
       label: category.name,
@@ -56,14 +78,11 @@ const AddProductForm = () => {
 
   // get all variants
   const { data: variants } = useGetAllVarientsQuery(undefined) as { data: any };
-  console.log("variants", variants);
 
   const productVariantOptions = variants?.data?.data.map((variant: any) => ({
     label: variant.name + " " + "MG",
     value: variant._id,
   }));
-
-  console.log("categoryOptions", productCategoryOptions);
 
   if (isLoading) {
     return (
@@ -97,10 +116,11 @@ const AddProductForm = () => {
         description: data.description,
         photos: imgUrls,
       };
-      console.log("productInfo", productInfo);
-      //: Add Pet
-      // const response = await addPet(petInfo).unwrap();
-      //: Check if response is successful
+      // Add Product
+      const response = await createProduct(productInfo).unwrap();
+
+      // response is successful
+      toast.success(response?.message, { id: toastId, duration: 3000 });
 
       // toast.error(response?.message, { id: toastId, duration: 3000 });
     } catch (error: any) {

@@ -72,8 +72,11 @@ instance.interceptors.response.use(
         message: error?.response?.data?.message || "Something went wrong!!!",
         errorMessages: error?.response?.data?.message,
       };
-      // return Promise.reject(error);
-      return responseObject;
+
+      console.log("error from axiosInstance", responseObject);
+
+      return Promise.reject(error);
+      // return responseObject;
     }
   }
 );

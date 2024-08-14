@@ -37,6 +37,9 @@ export default function ChangeRoleModal({
     setOpen(false);
   };
 
+  console.log("selectedRow", selectedRow);
+  
+
   //: Update Adoption Request Status
   const [changeUserRole] = useChangeUserRoleMutation();
 

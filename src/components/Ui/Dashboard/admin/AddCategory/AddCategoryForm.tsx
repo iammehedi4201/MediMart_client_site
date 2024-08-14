@@ -1,6 +1,7 @@
 "use client";
 import PForm from "@/components/Forms/PForm";
 import PInput from "@/components/Forms/PInput";
+import { useCreateCategoryMutation } from "@/redux/api/category/categoryApi";
 
 import { uploadImgToIMGBB } from "@/utils/uploadImgToIMGBB";
 import { Box, Button, Tooltip } from "@mui/material";
@@ -13,24 +14,25 @@ import { z } from "zod";
 // add product validation schema
 const addCategoryValidationSchema = z.object({});
 
-// type for product
-type Product = {};
-
 // Default Values
 type DefaultValues = {
-  product: Product;
+  name: string;
+  slug: string;
+  thumbnail: string;
 };
 
 //: Default Values
 const defaultValues: DefaultValues = {
-  product: {},
+  name: "",
+  slug: "",
+  thumbnail: "",
 };
 const AddCategoryForm = () => {
-  //: router
-  const router = useRouter();
-
   //:File state
   const [files, setFiles] = useState<any>([]);
+
+  // create category
+  const [createCategory] = useCreateCategoryMutation();
 
   //: Handle add category
   const handleAddCategory: SubmitHandler<FieldValues> = async (data) => {
@@ -45,9 +47,12 @@ const AddCategoryForm = () => {
         thumbnail: imgUrls[0],
       };
       console.log("CategoryInfo", categoryInfo);
-      //: Add Pet
-      // const response = await addPet(petInfo).unwrap();
-      //: Check if response is successful
+      // Add category
+      const response = await createCategory(categoryInfo).unwrap();
+
+      console.log("Response", response);
+
+      toast.success(response?.message, { id: toastId, duration: 3000 });
 
       // toast.error(response?.message, { id: toastId, duration: 3000 });
     } catch (error: any) {

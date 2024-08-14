@@ -3,9 +3,9 @@
 import SectionHeader from "@/components/Shared/SectionHeader/SectionHeader";
 import PetViewModal from "@/components/Ui/PetViewModal/PetViewModal";
 import {
-  useDeletePetByIdMutation,
-  useGetAllPetsQuery,
-} from "@/redux/api/pet/petApi";
+  useDeleteProductByIdMutation,
+  useGetAllProductsQuery,
+} from "@/redux/api/product/productApi";
 import { EditNote } from "@mui/icons-material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -15,12 +15,12 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { toast } from "sonner";
 
-const ManagePetsPage = () => {
+const ManageProductsPage = () => {
   //: Get all pets
-  const { data: pets, isLoading } = useGetAllPetsQuery("");
+  const { data: products, isLoading } = useGetAllProductsQuery("");
 
   //: Delete pet
-  const [deletePet] = useDeletePetByIdMutation();
+  const [deleteProduct] = useDeleteProductByIdMutation();
 
   //: Modal open state
   const [open, setOpen] = React.useState(false);
@@ -30,45 +30,40 @@ const ManagePetsPage = () => {
 
   //: Handle delete pet
   const handleDelete = async (id: string) => {
-    const toastId = toast.loading("Deleting Pet...");
+    const toastId = toast.loading("Deleting Product ...");
     try {
-      await deletePet(id).unwrap();
-      toast.success("Pet deleted successfully", {
+      await deleteProduct(id).unwrap();
+      toast.success("Prouduct deleted successfully", {
         id: toastId,
         duration: 2000,
       });
     } catch (error) {
-      toast.error("Failed to delete pet", { id: toastId, duration: 2000 });
+      toast.error("Failed to delete Product", { id: toastId, duration: 2000 });
     }
   };
 
-  const rowsData = pets?.data?.map((pet: any) => ({
-    id: pet.id,
-    name: pet.name,
-    species: pet.species,
-    breed: pet.breed,
-    gender: pet.gender,
-    age: pet.age,
-    location: pet.location,
-    photo: pet.PetImages[0].url,
-    size: pet.size,
-    description: pet.description,
-    temperament: pet.temperament,
-    medicalHistory: pet.medicalHistory,
-    adoptionRequirements: pet.adoptionRequirements,
-    specialNeeds: pet.speacialNeeds,
-    healthStatus: pet.healthStatus,
+  console.log("products", products);
+  
+
+  const rowsData = products?.data?.map((product: any) => ({
+    id: product._id,
+    name: product.name,
+    price: Number(product.price),
+    discount: Number(product.discount),
+    company: product.company,
+    quantity: Number(product.quantity),
+    photos: product?.photos[0]
   }));
 
   const columns: GridColDef[] = [
     {
-      field: "photo",
+      field: "photos",
       headerName: "Photo",
       flex: 1,
       headerClassName: "bg-[#f04336] text-white text-lg font-extrabold",
       renderCell: ({ row }) => (
         <Image
-          src={row?.photo}
+          src={row?.photos}
           alt="pet image"
           height={80}
           width={80}
@@ -83,20 +78,20 @@ const ManagePetsPage = () => {
       flex: 1,
     },
     {
-      field: "species",
-      headerName: "Species",
+      field: "company",
+      headerName: "company",
       headerClassName: "bg-[#f04336] text-white text-lg font-extrabold",
       flex: 1,
     },
     {
-      field: "breed",
-      headerName: "Breed",
+      field: "price",
+      headerName: "Price",
       headerClassName: "bg-[#f04336] text-white text-lg font-extrabold",
       flex: 1,
     },
     {
-      field: "location",
-      headerName: "Location",
+      field: "quantity",
+      headerName: "Quantity",
       headerClassName: "bg-[#f04336] text-white text-lg font-extrabold",
       flex: 1,
     },
@@ -162,7 +157,7 @@ const ManagePetsPage = () => {
 
   return (
     <>
-      <PetViewModal selectedRow={selectedRow} open={open} setOpen={setOpen} />
+      {/* <PetViewModal selectedRow={selectedRow} open={open} setOpen={setOpen} /> */}
       <SectionHeader HeaderTitle="Manage Pets" subTitle="Dashboard" />
       <Box my={10}>
         <Box sx={{ minHeight: "100vh", width: "100%" }}>
@@ -190,4 +185,4 @@ const ManagePetsPage = () => {
   );
 };
 
-export default ManagePetsPage;
+export default ManageProductsPage;

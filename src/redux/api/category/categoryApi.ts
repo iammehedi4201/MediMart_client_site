@@ -11,18 +11,18 @@ const userApi = baseApi.injectEndpoints({
       },
       providesTags: ["Category"],
     }),
-    updateMyProfile: builder.mutation({
+    createCategory: builder.mutation({
       query: (data) => {
         console.log("Body", data);
         return {
-          url: "/profile",
-          method: "PUT",
+          url: "/category/create-category",
+          method: "POST",
           data,
         };
       },
-      invalidatesTags: [],
+      invalidatesTags: ["Category"],
     }),
   }),
 });
 
-export const { useGetAllCategoriesQuery } = userApi;
+export const { useGetAllCategoriesQuery, useCreateCategoryMutation } = userApi;

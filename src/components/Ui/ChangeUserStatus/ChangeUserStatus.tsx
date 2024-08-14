@@ -69,7 +69,7 @@ export default function ChangeUserStatus({
               }}
             >
               <PSelectField
-                name="status"
+                name="isDeleted"
                 label="Status"
                 options={userStatusOptions}
               />

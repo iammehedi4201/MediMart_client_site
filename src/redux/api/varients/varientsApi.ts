@@ -2,6 +2,16 @@ import { baseApi } from "../baseApi";
 
 const petApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    createVarient: builder.mutation({
+      query: (data) => {
+        return {
+          url: `/varient/create-varients`,
+          method: "POST",
+          data,
+        };
+      },
+      invalidatesTags: ["varient"],
+    }),
     getAllVarients: builder.query({
       query: (query) => {
         return {
@@ -9,13 +19,7 @@ const petApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
-      transformResponse: (data, meta) => {
-        return {
-          data,
-          meta,
-        };
-      },
-      providesTags: [],
+      providesTags: ["varient"],
     }),
     getVarientById: builder.query({
       query: (id: string) => {
@@ -24,46 +28,33 @@ const petApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
-      providesTags: [],
+      providesTags: ["varient"],
     }),
-
-    addPet: builder.mutation({
-      query: (data) => {
-        return {
-          url: `/product`,
-          method: "POST",
-          data,
-        };
-      },
-      invalidatesTags: [],
-    }),
-    updatePetById: builder.mutation({
-      query: (data) => {
-        console.log("petInfo", data);
-        return {
-          url: `/product/${data?.id}`,
-          method: "PUT",
-          contentType: "application/json",
-          data: data?.petInfo,
-        };
-      },
-      invalidatesTags: [],
-    }),
-    DeletePetById: builder.mutation({
-      query: (id: string) => {
-        return {
-          url: `/product/${id}`,
-          method: "DELETE",
-        };
-      },
-    }),
+    // updatePetById: builder.mutation({
+    //   query: (data) => {
+    //     console.log("petInfo", data);
+    //     return {
+    //       url: `/product/${data?.id}`,
+    //       method: "PUT",
+    //       contentType: "application/json",
+    //       data: data?.petInfo,
+    //     };
+    //   },
+    //   invalidatesTags: [],
+    // }),
+    // DeletePetById: builder.mutation({
+    //   query: (id: string) => {
+    //     return {
+    //       url: `/product/${id}`,
+    //       method: "DELETE",
+    //     };
+    //   },
+    // }),
   }),
 });
 
 export const {
   useGetAllVarientsQuery,
   useGetVarientByIdQuery,
-  useAddPetMutation,
-  useUpdatePetByIdMutation,
-  useDeletePetByIdMutation,
+  useCreateVarientMutation,
 } = petApi;

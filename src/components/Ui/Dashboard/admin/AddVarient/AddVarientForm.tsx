@@ -1,6 +1,7 @@
 "use client";
 import PForm from "@/components/Forms/PForm";
 import PInput from "@/components/Forms/PInput";
+import { useCreateVarientMutation } from "@/redux/api/varients/varientsApi";
 
 import { uploadImgToIMGBB } from "@/utils/uploadImgToIMGBB";
 import { Box, Button, Tooltip } from "@mui/material";
@@ -13,40 +14,39 @@ import { z } from "zod";
 // add product validation schema
 const addVarientValidationSchema = z.object({});
 
-// type for product
-type Product = {};
-
 // Default Values
 type DefaultValues = {
-  product: Product;
+  name: string;
+  price: number;
 };
 
 //: Default Values
 const defaultValues: DefaultValues = {
-  product: {},
+  name: "",
+  price: 0,
 };
 const AddVarientForm = () => {
-  //: router
-  const router = useRouter();
-
   //:File state
   const [files, setFiles] = useState<any>([]);
+
+  // create varient
+  const [createVarient] = useCreateVarientMutation();
 
   //: Handle add varient
   const handleAddVarient: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Addingg Varient...");
 
     try {
-      const { imgUrls } = await uploadImgToIMGBB(files);
-
       const varientInfo = {
         name: data.name,
-        price: data.price,
+        price: Number(data.price),
       };
-      console.log("VarientInfo", varientInfo);
-      //: Add Pet
-      // const response = await addPet(petInfo).unwrap();
-      //: Check if response is successful
+      // Add varient
+      const response = await createVarient(varientInfo).unwrap();
+
+      console.log("Response", response);
+
+      toast.success(response?.message, { id: toastId, duration: 3000 });
 
       // toast.error(response?.message, { id: toastId, duration: 3000 });
     } catch (error: any) {
@@ -71,7 +71,7 @@ const AddVarientForm = () => {
           <PInput
             name="name"
             fullWidth={true}
-            label="Product Name*"
+            label="Varient Name*"
             type="text"
           />
         </Box>

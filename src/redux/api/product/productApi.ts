@@ -6,7 +6,7 @@ const petApi = baseApi.injectEndpoints({
       query: (data) => {
         console.log("productInfo", data);
         return {
-          url: `product/create-product`,
+          url: `/product/create-product`,
           method: "POST",
           data,
         };
@@ -33,55 +33,44 @@ const petApi = baseApi.injectEndpoints({
           meta: response.meta,
         };
       },
-      providesTags: [],
+      providesTags: ["product"],
     }),
-    getPetById: builder.query({
+    DeleteProductById: builder.mutation({
       query: (id: string) => {
         return {
-          url: `/product/${id}`,
-          method: "GET",
-        };
-      },
-      providesTags: [],
-    }),
-
-    addPet: builder.mutation({
-      query: (data) => {
-        return {
-          url: `/product`,
-          method: "POST",
-          data,
-        };
-      },
-      invalidatesTags: [],
-    }),
-    updatePetById: builder.mutation({
-      query: (data) => {
-        console.log("petInfo", data);
-        return {
-          url: `/product/${data?.id}`,
-          method: "PUT",
-          contentType: "application/json",
-          data: data?.petInfo,
-        };
-      },
-      invalidatesTags: [],
-    }),
-    DeletePetById: builder.mutation({
-      query: (id: string) => {
-        return {
-          url: `/product/${id}`,
+          url: `/product/delete-product/${id}`,
           method: "DELETE",
         };
       },
+      invalidatesTags: ["product"],
     }),
+
+    // getPetById: builder.query({
+    //   query: (id: string) => {
+    //     return {
+    //       url: `/product/${id}`,
+    //       method: "GET",
+    //     };
+    //   },
+    //   providesTags: [],
+    // }),
+    // updatePetById: builder.mutation({
+    //   query: (data) => {
+    //     console.log("petInfo", data);
+    //     return {
+    //       url: `/product/${data?.id}`,
+    //       method: "PUT",
+    //       contentType: "application/json",
+    //       data: data?.petInfo,
+    //     };
+    //   },
+    //   invalidatesTags: [],
+    // }),
   }),
 });
 
 export const {
+  useCreateProductMutation,
   useGetAllProductsQuery,
-  useGetPetByIdQuery,
-  useAddPetMutation,
-  useUpdatePetByIdMutation,
-  useDeletePetByIdMutation,
+  useDeleteProductByIdMutation,
 } = petApi;

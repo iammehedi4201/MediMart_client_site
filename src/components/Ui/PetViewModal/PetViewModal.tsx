@@ -9,10 +9,6 @@ import {
   petSizeOptions,
   petTemperamentOptions,
 } from "@/constant/pet";
-import {
-  useGetPetByIdQuery,
-  useUpdatePetByIdMutation,
-} from "@/redux/api/pet/petApi";
 import CloseIcon from "@mui/icons-material/Close";
 import { Box } from "@mui/material";
 import AppBar from "@mui/material/AppBar";

@@ -5,7 +5,7 @@ const userApi = baseApi.injectEndpoints({
     getAllUsers: builder.query({
       query: () => {
         return {
-          url: "/",
+          url: "/user/get-users",
           method: "GET",
         };
       },
@@ -35,8 +35,8 @@ const userApi = baseApi.injectEndpoints({
     ChangeUserStatus: builder.mutation({
       query: (data) => {
         return {
-          url: `/status/${data.id}`,
-          method: "PUT",
+          url: `/user/delete-user/${data.id}`,
+          method: "DELETE",
           data: data?.updateStatusInfo,
         };
       },
@@ -45,7 +45,7 @@ const userApi = baseApi.injectEndpoints({
     changeUserRole: builder.mutation({
       query: (data) => {
         return {
-          url: `/role/${data.id}`,
+          url: `/user/change-role/${data.id}`,
           method: "PUT",
           data: data?.role,
         };

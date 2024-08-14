@@ -28,12 +28,16 @@ export const statusOptions = [
 
 export const roleOptions = [
   {
+    label: "Super Admin",
+    value: "Super_Admin",
+  },
+  {
     label: "Admin",
-    value: "ADMIN",
+    value: "Admin",
   },
   {
     label: "User",
-    value: "USER",
+    value: "User",
   },
 ];
 
@@ -42,14 +46,10 @@ export const roleOptions = [
 export const userStatusOptions = [
   {
     label: "Active",
-    value: "ACTIVE",
-  },
-  {
-    label: "Blocked",
-    value: "BLOCKED",
+    value: false,
   },
   {
     label: "Deleted",
-    value: "DELETED",
+    value: true,
   },
 ];
