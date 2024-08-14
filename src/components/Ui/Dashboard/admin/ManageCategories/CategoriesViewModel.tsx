@@ -1,13 +1,10 @@
 import PForm from "@/components/Forms/PForm";
 import PInput from "@/components/Forms/PInput";
 import SectionHeader from "@/components/Shared/SectionHeader/SectionHeader";
-import { useGetAllCategoriesQuery } from "@/redux/api/category/categoryApi";
 import {
-  useGetProductByIdQuery,
-  useUpdateProductByIdMutation,
-} from "@/redux/api/product/productApi";
-import { useGetAllVarientsQuery } from "@/redux/api/varients/varientsApi";
-import { ICategory } from "@/types";
+  useGetCategoryByIdQuery,
+  useUpdateCategoryByIdMutation,
+} from "@/redux/api/category/categoryApi";
 import CloseIcon from "@mui/icons-material/Close";
 import { Box } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
@@ -30,68 +27,40 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-type PetViewModalProps = {
+type CategoryViewModalProps = {
   open: boolean;
   setOpen: (open: boolean) => void;
   selectedRow: any;
 };
 
-export default function PetViewModal({
+export default function CategoryViewModal({
   open,
   setOpen,
   selectedRow,
-}: PetViewModalProps) {
+}: CategoryViewModalProps) {
   const handleClose = () => {
     setOpen(false);
   };
 
   //: Get Pet By Id
   const {
-    data: product,
+    data: category,
     isLoading,
     isSuccess,
     isFetching,
-  } = useGetProductByIdQuery(selectedRow?.id as string);
+  } = useGetCategoryByIdQuery(selectedRow?.id as string);
 
   //: update pet info handler
-  const [updateProductInfo, { isLoading: isUpdateProductInfoLoading }] =
-    useUpdateProductByIdMutation();
+  const [updateCategoryData, { isLoading: isUpdatCategoryInfoLoading }] =
+    useUpdateCategoryByIdMutation();
 
-  console.log("selectedRow", product);
-
-  // get all product categories
-  const { data: categories } = useGetAllCategoriesQuery(undefined);
-
-  const productCategoryOptions = categories?.data?.map(
-    (category: ICategory) => ({
-      label: category.name,
-      value: category._id,
-    })
-  );
-
-  // get all variants
-  const { data: variants } = useGetAllVarientsQuery(undefined) as { data: any };
-
-  const productVariantOptions = variants?.data?.map((variant: any) => ({
-    label: variant.name + " " + "MG",
-    value: variant._id,
-  }));
+  console.log("selectedRow", category);
 
   //: Default Values
   const defaultValues = {
-    name: product?.data?.name,
-    metaKey: product?.data?.metaKey,
-    price: product?.data?.price,
-    discount: product?.data?.discount,
-    company: product?.data?.company,
-    quantity: product?.data?.quantity,
-    categories: {
-      primary: product?.data?.categories?.primary,
-      secondary: product?.data?.categories?.secondary,
-      tertiary: product?.data?.categories?.tertiary,
-    },
-    variants: product?.data?.variants,
-    description: product?.data?.description,
+    name: category?.data?.name,
+    slug: category?.data?.slug,
+    thumbnail: category?.data?.thumbnail,
   };
 
   console.log("defaultValues", defaultValues);
@@ -103,16 +72,13 @@ export default function PetViewModal({
         id: selectedRow?.id,
         updatedInfo: {
           ...data,
-          quantity: Number(data.quantity),
-          price: Number(data.price),
-          discount: Number(data.discount),
         },
       };
 
       console.log("updatedInfo", updatedInfo);
-      
-      //: Update Pet Info
-      const response = await updateProductInfo(updatedInfo).unwrap();
+
+      //: Update Category Info
+      const response = await updateCategoryData(updatedInfo).unwrap();
       toast.success(response?.message, { id: toastId, duration: 3000 });
       setOpen(false);
     } catch (error: any) {
@@ -164,50 +130,11 @@ export default function PetViewModal({
                     type="text"
                   />
                   <PInput
-                    name="metaKey"
+                    name="slug"
                     fullWidth={true}
-                    label="MetaKey*"
+                    label="Slug*"
                     type="text"
                   />
-                  <PInput
-                    name="price"
-                    fullWidth={true}
-                    label="Price*"
-                    type="text"
-                  />
-                  <PInput
-                    name="discount"
-                    fullWidth={true}
-                    label="Discount*"
-                    type="text"
-                  />
-                  <PInput
-                    name="company"
-                    fullWidth={true}
-                    label="Company*"
-                    type="text"
-                  />
-                  <PInput
-                    name="quantity"
-                    fullWidth={true}
-                    label="Quantity*"
-                    type="text"
-                  />
-
-                  {/* <PMultipleSelect
-                    name="categories"
-                    fullWidth={true}
-                    label="Categories*"
-                    options={productCategoryOptions}
-                    multiple={true}
-                  />
-                  <PMultipleSelect
-                    name="variants"
-                    fullWidth={true}
-                    label="Variants*"
-                    options={productVariantOptions}
-                    multiple={true}
-                  /> */}
                 </div>
                 <Box
                   sx={{
@@ -215,11 +142,12 @@ export default function PetViewModal({
                   }}
                 >
                   <PInput
-                    name="description"
+                    name="thumbnail"
                     fullWidth={true}
-                    label="Description*"
+                    label="Photo*"
                     type="text"
                     size="medium"
+                    disabled={true}
                   />
                 </Box>
                 <Box className="!mt-10">
@@ -229,7 +157,7 @@ export default function PetViewModal({
                       backgroundColor: "#f04336",
                     }}
                   >
-                    Update Pet Info
+                    Update Category Info
                   </Button>
                 </Box>
               </PForm>

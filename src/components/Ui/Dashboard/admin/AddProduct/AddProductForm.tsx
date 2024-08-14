@@ -119,7 +119,7 @@ const AddProductForm = () => {
       // Add Product
       const response = await createProduct(productInfo).unwrap();
 
-      // response is successful
+      //: response is successful
       toast.success(response?.message, { id: toastId, duration: 3000 });
 
       // toast.error(response?.message, { id: toastId, duration: 3000 });

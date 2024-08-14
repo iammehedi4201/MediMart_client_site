@@ -30,17 +30,17 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-type PetViewModalProps = {
+type ProductViewModalProps = {
   open: boolean;
   setOpen: (open: boolean) => void;
   selectedRow: any;
 };
 
-export default function PetViewModal({
+export default function ProductViewModal({
   open,
   setOpen,
   selectedRow,
-}: PetViewModalProps) {
+}: ProductViewModalProps) {
   const handleClose = () => {
     setOpen(false);
   };
@@ -110,7 +110,7 @@ export default function PetViewModal({
       };
 
       console.log("updatedInfo", updatedInfo);
-      
+
       //: Update Pet Info
       const response = await updateProductInfo(updatedInfo).unwrap();
       toast.success(response?.message, { id: toastId, duration: 3000 });

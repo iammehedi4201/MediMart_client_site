@@ -11,6 +11,7 @@ type TInputProps = {
   placeholder?: string;
   required?: boolean;
   className?: string;
+  disabled?: boolean;
 };
 
 const PInput = ({
@@ -22,6 +23,7 @@ const PInput = ({
   sx,
   required,
   className,
+  disabled,
 }: TInputProps) => {
   const { control } = useFormContext();
   return (
@@ -41,6 +43,7 @@ const PInput = ({
           error={!!error?.message}
           helperText={error?.message}
           className={className}
+          disabled={disabled}
         />
       )}
     />

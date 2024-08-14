@@ -44,28 +44,27 @@ const petApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["product"],
     }),
-
-    // getPetById: builder.query({
-    //   query: (id: string) => {
-    //     return {
-    //       url: `/product/${id}`,
-    //       method: "GET",
-    //     };
-    //   },
-    //   providesTags: [],
-    // }),
-    // updatePetById: builder.mutation({
-    //   query: (data) => {
-    //     console.log("petInfo", data);
-    //     return {
-    //       url: `/product/${data?.id}`,
-    //       method: "PUT",
-    //       contentType: "application/json",
-    //       data: data?.petInfo,
-    //     };
-    //   },
-    //   invalidatesTags: [],
-    // }),
+    getProductById: builder.query({
+      query: (id: string) => {
+        return {
+          url: `/product/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["product"],
+    }),
+    updateProductById: builder.mutation({
+      query: (data) => {
+        console.log("productInfo", data);
+        return {
+          url: `/product/update-product/${data?.id}`,
+          method: "PUT",
+          contentType: "application/json",
+          data: data?.updatedInfo,
+        };
+      },
+      invalidatesTags: ["product"],
+    }),
   }),
 });
 
@@ -73,4 +72,6 @@ export const {
   useCreateProductMutation,
   useGetAllProductsQuery,
   useDeleteProductByIdMutation,
+  useGetProductByIdQuery,
+  useUpdateProductByIdMutation,
 } = petApi;
