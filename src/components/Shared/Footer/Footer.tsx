@@ -21,7 +21,7 @@ const Footer = () => {
                   color: "#f04336", // text-[#f04336]
                 }}
               >
-                PetVortex
+                MediMart
               </Typography>
             </a>
           </div>

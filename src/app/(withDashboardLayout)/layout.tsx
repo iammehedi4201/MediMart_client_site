@@ -1,4 +1,5 @@
 "use client";
+import PrivateRoute from "@/components/Hoc/WithAuth/WithAuth";
 import DashboardNavbar from "@/components/Shared/DashboardNavbar/DashboardNavbar";
 import DashboardSidebar from "@/components/Shared/DashboardSidebar/DashboardSidebar";
 import { isLoggedIn } from "@/services/auth.services";
@@ -13,7 +14,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   }
 
   return (
-    <div>
+    <PrivateRoute>
       <div className="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white  text-black dark:text-white">
         {/* Header  */}
         <DashboardNavbar />
@@ -24,7 +25,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           {children}
         </div>
       </div>
-    </div>
+    </PrivateRoute>
   );
 };
 

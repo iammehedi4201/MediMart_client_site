@@ -1,98 +1,25 @@
+import UserHomeProfileSection from "@/components/Ui/Dashboard/user/UserHome/UserHomeProfileSection";
+import { getUserInfo } from "@/services/auth.services";
+import { Metadata } from "next";
 import Image from "next/image";
-import React from "react";
 
-const UserHome = () => {
+export const metadata: Metadata = {
+  title: "MediMart | User Home",
+  description: "MediMart is a medical store",
+};
+
+const UserHome = async () => {
+  const userInfo = getUserInfo();
+
   return (
     <div className="min-h-screen p-10">
       <h1 className="text-4xl italic text-black text-center mb-16 pt-10 w-full underline underline-offset-2 font-semibold">
         Hi, Welcome Back!
       </h1>
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
-        <section
-          className="section about-section  w-full lg:col-span-2 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)]"
-          id="about w-full"
-        >
-          <div className="container mx-auto px-4">
-            <div className="  lg:flex lg:flex-row items-center justify-between">
-              <div className="w-full lg:w-6/12 ">
-                <div className="about-avatar ">
-                  <Image
-                    width={300}
-                    height={300}
-                    className="mx-auto"
-                    src="https://bootdey.com/img/Content/avatar/avatar7.png"
-                    title=""
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div className="w-full lg:w-6/12">
-                <div className="about-text go-to">
-                  <h3 className="text-3xl lg:text-4xl font-bold text-gray-900">
-                    About Me
-                  </h3>
-                  <h6 className="text-red-500 font-semibold lg:text-xl leading-relaxed">
-                    A Lead UX &amp; UI designer based in Canada
-                  </h6>
-                  <p className="text-black lg:text-lg">
-                    I{" "}
-                    <span className="bg-red-500 text-black font-semibold px-2 py-1 rounded">
-                      design and develop
-                    </span>{" "}
-                    services for customers of all sizes, specializing in
-                    creating stylish, modern websites, web services, and online
-                    stores. My passion is to design digital user experiences
-                    through the bold interface and meaningful interactions.
-                  </p>
-                  <div className="grid grid-cols-2 lg:grid-cols-2 gap-5 mt-4">
-                    <div className="media">
-                      <label className="font-semibold text-black">
-                        Birthday
-                      </label>
-                      <p className="text-black">4th April 1998</p>
-                    </div>
-                    <div className="media">
-                      <label className="font-semibold text-black">Age</label>
-                      <p className="text-black">22 Yr</p>
-                    </div>
-                    <div className="media">
-                      <label className="font-semibold text-black">
-                        Residence
-                      </label>
-                      <p className="text-black">Canada</p>
-                    </div>
-                    <div className="media">
-                      <label className="font-semibold text-black">
-                        Address
-                      </label>
-                      <p className="text-black">California, USA</p>
-                    </div>
-                    <div className="media">
-                      <label className="font-semibold text-black">E-mail</label>
-                      <p className="text-black">info@domain.com</p>
-                    </div>
-                    <div className="media">
-                      <label className="font-semibold text-black">Phone</label>
-                      <p className="text-black">820-885-3321</p>
-                    </div>
-                    <div className="media">
-                      <label className="font-semibold text-black">Skype</label>
-                      <p className="text-black">skype.0404</p>
-                    </div>
-                    <div className="media">
-                      <label className="font-semibold text-black">
-                        Freelance
-                      </label>
-                      <p className="text-black">Available</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="p-5 space-y-5 flex flex-col justify-evenly  shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)]]">
+        {/* profile section */}
+        <UserHomeProfileSection />
+        {/* <section className="p-5 space-y-5 flex flex-col justify-evenly  shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)]]">
           <h1 className="text-black text-4xl text-center font-bold italic">
             Your Activities
           </h1>
@@ -310,7 +237,7 @@ const UserHome = () => {
               <span className="text-xs font-medium"> 67.81% </span>
             </div>
           </article>
-        </section>
+        </section> */}
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import { useGetMyProfileQuery } from "@/redux/api/user/userApi";
-import { removeUser } from "@/services/auth.services";
+import { getUserInfo, removeUser } from "@/services/auth.services";
 import { Box, Button, Typography } from "@mui/material";
 import dynamic from "next/dynamic";
 import Link from "next/link";
@@ -8,8 +8,9 @@ import { useRouter } from "next/navigation";
 const DashboardNavbar = () => {
   //:router
   const router = useRouter();
+  const userInfo = getUserInfo();
   //: get my profile
-  const { data: myProfile } = useGetMyProfileQuery("");
+  const { data: myProfile } = useGetMyProfileQuery(userInfo?.email);
   //:AuthButton
   const AuthButton = dynamic(
     () => import("@/components/Ui/AuthButton/AuthButton"),
@@ -49,7 +50,7 @@ const DashboardNavbar = () => {
               boxShadow: "0 0 5px #f04336",
             }}
           >
-            PetVortex
+            MediMart
           </Typography>
         </Box>
       </div>
@@ -58,7 +59,7 @@ const DashboardNavbar = () => {
           Hi, MD {myProfile?.data?.name}
         </h1>
         <h1 className="text-[#f04336] font-extrabold text-2xl">
-          Welcome to PetVortex
+          Welcome to MediMart
         </h1>
       </div>
       <div className="flex justify-between items-center h-14 bg-white header-right">

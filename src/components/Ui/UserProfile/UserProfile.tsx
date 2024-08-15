@@ -20,10 +20,7 @@ const UserProfile = () => {
   console.log("userInfo", userInfo);
 
   //:get user Profile
-  const {
-    data: profile,
-    isLoading,
-  } = useGetMyProfileQuery(userInfo?.email);
+  const { data: profile, isLoading } = useGetMyProfileQuery(userInfo?.email);
 
   console.log("profile", profile);
 
@@ -88,47 +85,7 @@ const UserProfile = () => {
               color: "white",
             },
           }}
-        >
-          <Box sx={{ px: 2, py: 1 }}>
-            <Typography variant="body2" color="text.primary">
-              {profile?.data?.name}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {profile?.data?.email}
-            </Typography>
-          </Box>
-          <List>
-            <ListItem component="a" href="#">
-              <ListItemText primary="Dashboard" />
-            </ListItem>
-            <ListItem component={Link} href="/addproduct">
-              <ListItemText primary="Add Products" />
-            </ListItem>
-            <ListItem component={Link} href="/myproducts">
-              <ListItemText primary="My Products" />
-            </ListItem>
-            <ListItem>
-              <Button
-                type="button"
-                variant="contained"
-                color="primary"
-                onClick={async () => {
-                  removeUser();
-                  router.push("/");
-                }}
-                sx={{
-                  textTransform: "none",
-                  background: "linear-gradient(to right, #00c6ff, #0072ff)",
-                  "&:hover": {
-                    background: "linear-gradient(to left, #00c6ff, #0072ff)",
-                  },
-                }}
-              >
-                LogOut
-              </Button>
-            </ListItem>
-          </List>
-        </Box>
+        ></Box>
       </Box>
     </>
   );

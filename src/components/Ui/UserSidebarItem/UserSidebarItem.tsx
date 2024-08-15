@@ -43,7 +43,7 @@ const UserSidebarItem = () => {
           </li>
           <li>
             <Link
-              href="/dashboard/user/my-adoption-requests"
+              href="/dashboard/user/myOrders"
               className="relative flex flex-row items-center h-11 focus:outline-none text-white-600 hover:text-white-800  border-r-4 border-transparent hover:border-[#f04336] hover:bg-orange-50 pr-6"
             >
               <span className="inline-flex justify-center items-center ml-4 mb-1">
@@ -64,17 +64,9 @@ const UserSidebarItem = () => {
                 </svg>
               </span>
               <span className="ml-2 text-md tracking-wide truncate font-bold">
-                My Adoption Request
+                My Orders
               </span>
             </Link>
-          </li>
-
-          <li className="px-5 hidden md:block">
-            <div className="flex flex-row items-center mt-5 h-8">
-              <div className="text-sm font-light tracking-wide text-gray-400 uppercase border-b-2 ">
-                Settings
-              </div>
-            </div>
           </li>
           <li>
             <Link
@@ -103,7 +95,7 @@ const UserSidebarItem = () => {
               </span>
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link
               href="/dashboard/user/change-password"
               className="relative flex flex-row items-center h-11 focus:outline-none text-white-600 hover:text-white-800  border-r-4 border-transparent hover:border-[#f04336] hover:bg-orange-50 pr-6"
@@ -135,7 +127,7 @@ const UserSidebarItem = () => {
                 Change Password
               </span>
             </Link>
-          </li>
+          </li> */}
         </ul>
       )}
     </>

@@ -1,28 +1,25 @@
 export const authKey = "accessToken";
 
-export const genderOptions = [
-  {
-    label: "Male",
-    value: "MALE",
-  },
-  {
-    label: "Female",
-    value: "FEMALE",
-  },
-];
-
 export const statusOptions = [
   {
     label: "Pending",
-    value: "PENDING",
+    value: "pending",
   },
   {
-    label: "Approved",
-    value: "APPROVED",
+    label: "Processed",
+    value: "processed",
   },
   {
-    label: "Rejected",
-    value: "REJECTED",
+    label: "Shipped",
+    value: "shipped",
+  },
+  {
+    label: "Delivered",
+    value: "delivered",
+  },
+  {
+    label: "Cancelled",
+    value: "cancelled",
   },
 ];
 

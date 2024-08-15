@@ -27,10 +27,10 @@ const ProductsPage = () => {
         <div className="px-4 py-4 mx-auto max-w-full lg:py-6 md:px-6">
           <div className="flex flex-wrap mb-24 -mx-3">
             {/* side filter feature */}
-            <SideFilterSection />
-            <div className="w-full px-3 lg:w-3/4">
+            {/* <SideFilterSection /> */}
+            <div className="w-full px-3 lg:w-3/4 mx-auto">
               {/* top filter feature */}
-              <TopFilterSection />
+              {/* <TopFilterSection /> */}
               {/* Pets Section */}
               <ProductSection />
             </div>

@@ -2,21 +2,12 @@
 import PForm from "@/components/Forms/PForm";
 import PInput from "@/components/Forms/PInput";
 import PMultipleSelect from "@/components/Forms/PMultipleSelect";
-import PSelectField from "@/components/Forms/PSelect";
-import SectionHeader from "@/components/Shared/SectionHeader/SectionHeader";
-import { genderOptions } from "@/constant/common";
-import {
-  petHealthStatus,
-  petSizeOptions,
-  petTemperamentOptions,
-} from "@/constant/pet";
 import { useGetAllCategoriesQuery } from "@/redux/api/category/categoryApi";
 import { useCreateProductMutation } from "@/redux/api/product/productApi";
 import { useGetAllVarientsQuery } from "@/redux/api/varients/varientsApi";
 import { ICategory } from "@/types";
 
 import { uploadImgToIMGBB } from "@/utils/uploadImgToIMGBB";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, Button, Tooltip } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -79,7 +70,10 @@ const AddProductForm = () => {
   // get all variants
   const { data: variants } = useGetAllVarientsQuery(undefined) as { data: any };
 
-  const productVariantOptions = variants?.data?.data.map((variant: any) => ({
+  console.log("variants", variants);
+  
+
+  const productVariantOptions = variants?.data?.map((variant: any) => ({
     label: variant.name + " " + "MG",
     value: variant._id,
   }));

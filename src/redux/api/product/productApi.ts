@@ -15,16 +15,16 @@ const petApi = baseApi.injectEndpoints({
     }),
     getAllProducts: builder.query({
       query: (query) => {
-        // const params = new URLSearchParams();
-        // if (query) {
-        //   query.forEach((item: { name: string; value: any }) => {
-        //     params.append(item.name, item.value as any);
-        //   });
-        // }
+        const params = new URLSearchParams();
+        if (query) {
+          query.forEach((item: { name: string; value: any }) => {
+            params.append(item.name, item.value as any);
+          });
+        }
         return {
           url: `/product/get-products`,
           method: "GET",
-          //   params: params,
+          params: params,
         };
       },
       transformResponse: (response: any) => {

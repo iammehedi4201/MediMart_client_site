@@ -10,14 +10,14 @@ export const metadata: Metadata = {
 
 const ShippingPage = () => {
   return (
-   <PrivateRoute>
-        <div>
-          <SectionHeader HeaderTitle="Shipping" />
-          <div className="w-full my-10">
-            <ShippingForm />
-          </div>
+    <PrivateRoute>
+      <div>
+        <SectionHeader HeaderTitle="Shipping" />
+        <div className="w-full my-10">
+          <ShippingForm />
         </div>
-   </PrivateRoute>
+      </div>
+    </PrivateRoute>
   );
 };
 

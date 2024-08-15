@@ -33,7 +33,7 @@ const HeroSection = () => {
               minHeight: "100vh",
               "& img": {
                 width: "100%",
-                minHeight: "100vh",
+                minHeight: "100%",
                 objectFit: "cover",
               },
             }}
@@ -86,8 +86,8 @@ const HeroSection = () => {
                       xs: "2rem",
                       sm: "2rem",
                       md: "2.5rem",
-                      lg: "6rem",
-                      xl: "6rem",
+                      lg: "4rem",
+                      xl: "4rem",
                     },
                   }}
                 >
@@ -108,8 +108,8 @@ const HeroSection = () => {
                         xs: "1rem",
                         sm: "2rem",
                         md: "2.5rem",
-                        lg: "3rem",
-                        xl: "4rem",
+                        lg: "2rem",
+                        xl: "2rem",
                       },
                       borderRadius: "10px 10px 20px 20px",
                       clipPath: "polygon(0 0, 100% 0, 90% 100%, 10% 100%)",
@@ -131,7 +131,7 @@ const HeroSection = () => {
                       sm: "2rem",
                       md: "2.5rem",
                       lg: "3rem",
-                      xl: "6rem",
+                      xl: "4rem",
                     },
                   }}
                 >
@@ -141,19 +141,22 @@ const HeroSection = () => {
                   variant="h6"
                   component="p"
                   color={"white"}
-                  fontWeight={600}
+                  fontWeight={300}
+                  my={2}
                   sx={{
                     fontSize: {
                       xs: "0.6rem",
                       sm: "2rem",
                       md: "2.5rem",
                       lg: "2rem",
-                      xl: "1.5rem",
+                      xl: "1rem",
                     },
                   }}
                 >
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum
-                  fuga eum itaque architecto, repudiandae sunt aspernatur saepe,
+                  MediMart is a platform that connects patients with doctors and
+                  pharmacies. It is a one-stop solution for all your medical
+                  needs. where you can find all the information about doctors,
+                  one place.
                 </Typography>
                 <Button
                   variant="contained"
@@ -249,8 +252,8 @@ const HeroSection = () => {
                       xs: "2rem",
                       sm: "2rem",
                       md: "2.5rem",
-                      lg: "6rem",
-                      xl: "6rem",
+                      lg: "4rem",
+                      xl: "4rem",
                     },
                   }}
                 >
@@ -271,8 +274,8 @@ const HeroSection = () => {
                         xs: "1rem",
                         sm: "2rem",
                         md: "2.5rem",
-                        lg: "3rem",
-                        xl: "4rem",
+                        lg: "2rem",
+                        xl: "2rem",
                       },
                       borderRadius: "10px 10px 20px 20px",
                       clipPath: "polygon(0 0, 100% 0, 90% 100%, 10% 100%)",
@@ -293,8 +296,8 @@ const HeroSection = () => {
                       xs: "1.5rem",
                       sm: "2rem",
                       md: "2.5rem",
-                      lg: "3rem",
-                      xl: "6rem",
+                      lg: "4rem",
+                      xl: "4rem",
                     },
                   }}
                 >
@@ -304,19 +307,21 @@ const HeroSection = () => {
                   variant="h6"
                   component="p"
                   color={"white"}
-                  fontWeight={600}
+                  my={2}
+                  fontWeight={300}
                   sx={{
                     fontSize: {
                       xs: "0.6rem",
                       sm: "2rem",
                       md: "2.5rem",
                       lg: "2rem",
-                      xl: "1.5rem",
+                      xl: "1rem",
                     },
                   }}
                 >
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum
-                  fuga eum itaque architecto, repudiandae sunt aspernatur saepe,
+                  MediMart is a platform that connects patients with doctors and
+                  pharmacies. It is a one-stop solution for all your medical
+                  needs. where you can find all the information about doctors, one place.
                 </Typography>
                 <Button
                   variant="contained"
@@ -412,8 +417,8 @@ const HeroSection = () => {
                       xs: "2rem",
                       sm: "2rem",
                       md: "2.5rem",
-                      lg: "6rem",
-                      xl: "6rem",
+                      lg: "4rem",
+                      xl: "4rem",
                     },
                   }}
                 >
@@ -434,8 +439,8 @@ const HeroSection = () => {
                         xs: "1rem",
                         sm: "2rem",
                         md: "2.5rem",
-                        lg: "3rem",
-                        xl: "4rem",
+                        lg: "2rem",
+                        xl: "2rem",
                       },
                       borderRadius: "10px 10px 20px 20px",
                       clipPath: "polygon(0 0, 100% 0, 90% 100%, 10% 100%)",
@@ -456,8 +461,8 @@ const HeroSection = () => {
                       xs: "1.5rem",
                       sm: "2rem",
                       md: "2.5rem",
-                      lg: "3rem",
-                      xl: "6rem",
+                      lg: "4rem",
+                      xl: "4rem",
                     },
                   }}
                 >
@@ -467,19 +472,21 @@ const HeroSection = () => {
                   variant="h6"
                   component="p"
                   color={"white"}
-                  fontWeight={600}
+                  fontWeight={300}
+                  my={2}
                   sx={{
                     fontSize: {
                       xs: "0.6rem",
                       sm: "2rem",
                       md: "2.5rem",
                       lg: "2rem",
-                      xl: "1.5rem",
+                      xl: "1rem",
                     },
                   }}
                 >
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum
-                  fuga eum itaque architecto, repudiandae sunt aspernatur saepe,
+                  MediMart is a platform that connects patients with doctors and
+                  pharmacies. It is a one-stop solution for all your medical
+                  needs. where you can find all the information about doctors, one place.
                 </Typography>
                 <Button
                   variant="contained"

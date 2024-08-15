@@ -1,7 +1,8 @@
 import PForm from "@/components/Forms/PForm";
 import PSelectField from "@/components/Forms/PSelect";
-import { userStatusOptions } from "@/constant/common";
-import { useChangeUserStatusMutation } from "@/redux/api/user/userApi";
+import { roleOptions, statusOptions } from "@/constant/common";
+import { useUpdateOrderByIdMutation } from "@/redux/api/order/orderApi";
+import { useChangeUserRoleMutation } from "@/redux/api/user/userApi";
 import { Box, DialogActions, DialogContent, DialogTitle } from "@mui/material";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -20,39 +21,37 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-type UserStatusModalProps = {
-  changeUserModalOpen: boolean;
-  setChangeUserModalOpen: (open: boolean) => void;
+type ChangeOrderStatusProps = {
+  orderStatusModalOpen: boolean;
+  setOrderStatusModalOpen: (open: boolean) => void;
   selectedRow: any;
 };
 
-export default function ChangeUserStatus({
-  changeUserModalOpen: open,
-  setChangeUserModalOpen: setOpen,
+export default function ChangeOrderStatusModal({
+  orderStatusModalOpen: open,
+  setOrderStatusModalOpen: setOpen,
   selectedRow,
-}: UserStatusModalProps) {
+}: ChangeOrderStatusProps) {
   const handleClose = () => {
     setOpen(false);
   };
 
   //: Update Adoption Request Status
-  const [changeUserStatus] = useChangeUserStatusMutation();
+  const [updateOrderStatus] = useUpdateOrderByIdMutation();
 
   const handleDelete: SubmitHandler<FieldValues> = async (data) => {
-    const toastId = toast.loading("Changing user status...");
+    const toastId = toast.loading("Changing Order Status...");
     try {
-      const updateStatusInfo = {
+      const updateRoleInfo = {
         id: selectedRow.id,
-        updateStatusInfo: data,
+        updateStatus: data,
       };
-      console.log("updateStatusInfo", updateStatusInfo);
+      console.log("updateStatusInfo", updateRoleInfo);
 
-      const response = await changeUserStatus(updateStatusInfo).unwrap();
+      const response = await updateOrderStatus(updateRoleInfo).unwrap();
       toast.success(response?.message, { id: toastId, duration: 3000 });
       setOpen(false);
     } catch (error: any) {
-      console.log("error", error);
-      
       toast.error(error?.data?.message, { id: toastId, duration: 3000 });
     }
   };
@@ -61,7 +60,7 @@ export default function ChangeUserStatus({
     <React.Fragment>
       <Dialog fullWidth open={open} onClose={handleClose}>
         <DialogTitle fontWeight={600} textAlign={"center"}>
-          Change User Status
+          Change User Role
         </DialogTitle>
         <DialogContent>
           <PForm onSubmit={handleDelete}>
@@ -71,9 +70,9 @@ export default function ChangeUserStatus({
               }}
             >
               <PSelectField
-                name="isDeleted"
+                name="status"
                 label="Status"
-                options={userStatusOptions}
+                options={statusOptions}
               />
             </Box>
             <DialogActions>

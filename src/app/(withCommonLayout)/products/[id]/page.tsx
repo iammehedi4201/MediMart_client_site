@@ -27,6 +27,7 @@ const ProductDetailsPage = async ({ params }: typePropTypes) => {
   );
 
   const { data: product } = await response.json();
+  
 
   return (
     <div>

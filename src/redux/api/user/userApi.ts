@@ -25,9 +25,9 @@ const userApi = baseApi.injectEndpoints({
       query: (data) => {
         console.log("Body", data);
         return {
-          url: "/profile",
+          url: `/user/update-user-profile/${data.id}`,
           method: "PUT",
-          data,
+          data: data?.updateProfileInfo,
         };
       },
       invalidatesTags: ["user"],

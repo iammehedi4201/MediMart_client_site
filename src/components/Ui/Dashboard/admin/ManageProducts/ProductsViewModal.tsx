@@ -90,13 +90,13 @@ export default function ProductViewModal({
       secondary: product?.data?.categories?.secondary,
       tertiary: product?.data?.categories?.tertiary,
     },
-    variants: product?.data?.variants,
+    variants: product?.data?.variants?.map((variant: any) => variant._id),
     description: product?.data?.description,
   };
 
   console.log("defaultValues", defaultValues);
 
-  const handleUpdatePetInfo: SubmitHandler<FieldValues> = async (data) => {
+  const handleUpdateProductInfo: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Updating Pet Info...");
     try {
       const updatedInfo = {
@@ -152,7 +152,7 @@ export default function ProductViewModal({
           <div className="font-[sans-serif] text-[#333] my-10">
             <div className="mx-4 mb-4">
               <PForm
-                onSubmit={handleUpdatePetInfo}
+                onSubmit={handleUpdateProductInfo}
                 defaultValues={defaultValues}
                 className="max-w-6xl mx-auto bg-white shadow-[0_2px_18px_-3px_rgba(6,81,237,0.4)] sm:p-8 p-4 rounded-md"
               >

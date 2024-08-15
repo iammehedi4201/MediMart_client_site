@@ -2,33 +2,44 @@
 
 import SectionHeader from "@/components/Shared/SectionHeader/SectionHeader";
 import ChangeRoleModal from "@/components/Ui/ChangeRoleModal/ChangeRoleModal";
-import ChangeUserStatus from "@/components/Ui/ChangeUserStatus/ChangeUserStatus";
-import { useGetAllUsersQuery } from "@/redux/api/user/userApi";
+import { useGetAllOrdersQuery } from "@/redux/api/order/orderApi";
 import { EditNote } from "@mui/icons-material";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
-import { Box, CircularProgress, IconButton, Tooltip } from "@mui/material";
+import { Box, IconButton, Tooltip } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import Image from "next/image";
 import React from "react";
+import DeleteOrderModal from "./DeleteOrderModal";
+import ChangeOrderStatusModal from "./ChangeOrderStatusModal";
 
-const UsersTable = ({ showSectionHeader }: { showSectionHeader: boolean }) => {
+const OrdersTable = ({ showSectionHeader }: { showSectionHeader: boolean }) => {
   //: Get all pets
-  const { data: users, isLoading: isUserLoading } =
-    useGetAllUsersQuery(undefined);
+  const { data: orders, isLoading: isOrderLoading } =
+    useGetAllOrdersQuery(undefined);
+
+  //   meta:
+
+  // { page: 1, limit: 10, total: 26, totalPages: 3 }
+
+  const meta = orders?.meta;
+
+  const page = meta?.page;
+  const limit = meta?.limit;
+  const total = meta?.total;
+  const totalPages = meta?.totalPages;
 
   //: Delete pet
   //   const [deletePet] = useDeleteUserMutation();
 
   //: Change Role Modal State
-  const [roleModalOpen, setRoleModalOpen] = React.useState(false);
+  const [orderStatusModal, setOrderStatusModalOpen] = React.useState(false);
 
   //: Change User Status Modal State
-  const [changeUserModalOpen, setChangeUserModalOpen] = React.useState(false);
+  const [deleteOrderModalOpen, setDeleteOrderModalOpen] = React.useState(false);
 
   //: Selected row
   const [selectedRow, setSelectedRow] = React.useState<any>();
 
-  if (isUserLoading) {
+  if (isOrderLoading) {
     return (
       <div className="min-h-screen w-full flex justify-center items-center">
         <div className="w-20 h-20 border-t-4 border-b-4 border-[#f04336] rounded-full animate-spin"></div>
@@ -36,32 +47,19 @@ const UsersTable = ({ showSectionHeader }: { showSectionHeader: boolean }) => {
     );
   }
 
-  const rowsData = users?.data?.map((user: any) => ({
-    id: user._id,
-    name: user.name,
-    email: user.email,
-    role: user.roles,
-    photo: user?.photo,
+  const rowsData = orders?.data?.map((order: any) => ({
+    id: order.id,
+    name: order.userName,
+    email: order.userEmail,
+    phone: order.userPhone,
+    Products: order?.productDetails?.map((product: any) => product.name + "\n"),
+    Total: order.totalAmount,
+    Shipping: order.shippingAddress,
+    status: order.status,
+    orderDate: order.orderDate.split("T")[0],
   }));
 
   const columns: GridColDef[] = [
-    {
-      field: "photo",
-      headerName: "Photo",
-      flex: 1,
-      headerClassName: showSectionHeader
-        ? "bg-[#f9fafb]  text-Black text-lg font-extrabold"
-        : "bg-[#f04336]  text-white text-lg font-extrabold",
-      renderCell: ({ row }) => (
-        <Image
-          src={row?.photo}
-          alt="User Photo"
-          height={80}
-          width={80}
-          className="rounded"
-        />
-      ),
-    },
     {
       field: "name",
       headerName: "Name",
@@ -76,11 +74,63 @@ const UsersTable = ({ showSectionHeader }: { showSectionHeader: boolean }) => {
       headerClassName: showSectionHeader
         ? "bg-[#f9fafb]  text-Black text-lg font-extrabold"
         : "bg-[#f04336]  text-white text-lg font-extrabold",
+      flex: 2,
+    },
+    {
+      field: "phone",
+      headerName: "Phone",
+      headerClassName: showSectionHeader
+        ? "bg-[#f9fafb]  text-Black text-lg font-extrabold"
+        : "bg-[#f04336]  text-white text-lg font-extrabold",
       flex: 1,
     },
     {
-      field: "role",
-      headerName: "Role",
+      field: "Products",
+      headerName: "Products",
+      headerClassName: showSectionHeader
+        ? "bg-[#f9fafb]  text-Black text-lg font-extrabold"
+        : "bg-[#f04336]  text-white text-lg font-extrabold",
+      flex: 2,
+    },
+    {
+      field: "Total",
+      headerName: "Total",
+      headerClassName: showSectionHeader
+        ? "bg-[#f9fafb]  text-Black text-lg font-extrabold"
+        : "bg-[#f04336]  text-white text-lg font-extrabold",
+      flex: 1,
+    },
+    {
+      field: "Shipping",
+      headerName: "Shipping Address",
+      headerClassName: showSectionHeader
+        ? "bg-[#f9fafb]  text-Black text-lg font-extrabold"
+        : "bg-[#f04336]  text-white text-lg font-extrabold",
+      flex: 2,
+    },
+    {
+      field: "status",
+      headerName: "Status",
+      headerClassName: showSectionHeader
+        ? "bg-[#f9fafb]  text-Black text-lg font-extrabold"
+        : "bg-[#f04336]  text-white text-lg font-extrabold",
+      cellClassName: (params) => {
+        switch (params.value) {
+          case "pending":
+            return "text-yellow-500";
+          case "completed":
+            return "text-green-500";
+          case "cancelled":
+            return "text-red-500";
+          default:
+            return "text-gray-500";
+        }
+      },
+      flex: 1,
+    },
+    {
+      field: "orderDate",
+      headerName: "Order Date",
       headerClassName: showSectionHeader
         ? "bg-[#f9fafb]  text-Black text-lg font-extrabold"
         : "bg-[#f04336]  text-white text-lg font-extrabold",
@@ -101,7 +151,7 @@ const UsersTable = ({ showSectionHeader }: { showSectionHeader: boolean }) => {
             <Tooltip title="Change User Status">
               <IconButton
                 onClick={() => {
-                  setChangeUserModalOpen(true);
+                  setDeleteOrderModalOpen(true);
                   setSelectedRow(row);
                 }}
                 aria-label="delete"
@@ -118,7 +168,7 @@ const UsersTable = ({ showSectionHeader }: { showSectionHeader: boolean }) => {
             <Tooltip title="Change role">
               <IconButton
                 onClick={() => {
-                  setRoleModalOpen(true);
+                  setOrderStatusModalOpen(true);
                   setSelectedRow(row);
                 }}
                 aria-label="update"
@@ -137,7 +187,7 @@ const UsersTable = ({ showSectionHeader }: { showSectionHeader: boolean }) => {
     },
   ];
 
-  if (isUserLoading) {
+  if (isOrderLoading) {
     return (
       <div className="min-h-screen w-full flex justify-center items-center">
         <div className="w-20 h-20 border-t-4 border-b-4 border-[#f04336] rounded-full animate-spin"></div>
@@ -147,15 +197,15 @@ const UsersTable = ({ showSectionHeader }: { showSectionHeader: boolean }) => {
 
   return (
     <>
-      <ChangeUserStatus
+      <DeleteOrderModal
         selectedRow={selectedRow}
-        changeUserModalOpen={changeUserModalOpen}
-        setChangeUserModalOpen={setChangeUserModalOpen}
+        changeUserModalOpen={deleteOrderModalOpen}
+        setChangeUserModalOpen={setDeleteOrderModalOpen}
       />
-      <ChangeRoleModal
+      <ChangeOrderStatusModal
         selectedRow={selectedRow}
-        roleModalOpen={roleModalOpen}
-        setRoleModalOpen={setRoleModalOpen}
+        orderStatusModalOpen={orderStatusModal}
+        setOrderStatusModalOpen={setOrderStatusModalOpen}
       />
 
       {showSectionHeader ? (
@@ -164,7 +214,7 @@ const UsersTable = ({ showSectionHeader }: { showSectionHeader: boolean }) => {
         <SectionHeader HeaderTitle="Manage Users" subTitle="Dashboard" />
       )}
       <Box my={10}>
-        <Box sx={{ minHeight: "100vh", width: "100%", px: 2 }}>
+        <Box sx={{ width: "100%", px: 2 }}>
           <DataGrid
             rows={rowsData}
             columns={columns}
@@ -195,4 +245,4 @@ const UsersTable = ({ showSectionHeader }: { showSectionHeader: boolean }) => {
   );
 };
 
-export default UsersTable;
+export default OrdersTable;

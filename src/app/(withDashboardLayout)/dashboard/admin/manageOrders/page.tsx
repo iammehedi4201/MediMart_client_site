@@ -1,4 +1,5 @@
 import SectionHeader from "@/components/Shared/SectionHeader/SectionHeader";
+import OrdersTable from "@/components/Ui/Dashboard/admin/ManageOrders/OrdersTable";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 const manageOrdersPage = () => {
   return (
     <>
-      <SectionHeader HeaderTitle="Manage Orders" subTitle="Dashboard" />
+      <OrdersTable showSectionHeader={true} />
     </>
   );
 };

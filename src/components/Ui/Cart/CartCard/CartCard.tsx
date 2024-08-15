@@ -2,16 +2,12 @@ import { useAppDispatch } from "@/redux/hook";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import CartItemCard from "../CartItemCard/CartItemCard";
+import { toggleCartDrawer } from "@/redux/api/cart/cartSlice";
 
 const CartCard = () => {
-  
   const cartItems = useSelector((state: any) => state.cart.cartItems);
   const totalPrice = useSelector((state: any) => state.cart.totalPrice);
   const dispatch = useAppDispatch();
-
-
-
-  
 
   return (
     <div className="font-sans md:max-w-4xl max-md:max-w-xl mx-auto bg-white py-4">
@@ -48,10 +44,13 @@ const CartCard = () => {
         <div className="mt-8 space-y-2">
           <Link
             type="button"
-             href={'/shipping'}
+            href={"/shipping"}
             className="text-sm px-4 py-2.5 w-full flex justify-center font-semibold tracking-wide bg-[#f04336] hover:bg-orange-400 text-white rounded-md"
+            onClick={() => {
+              dispatch(toggleCartDrawer(false));
+            }}
           >
-           Proceed To Checkout
+            Proceed To Checkout
           </Link>
         </div>
       </div>

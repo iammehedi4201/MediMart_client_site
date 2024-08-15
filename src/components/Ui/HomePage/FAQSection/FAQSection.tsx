@@ -92,7 +92,7 @@ const FAQSection = () => {
                   FAQ Question
                 </Typography>
                 <Typography variant="h3" component="h4" fontWeight={600}>
-                  History & Family Adoption
+                  History & MediMart
                 </Typography>
               </Box>
               <Box>

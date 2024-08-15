@@ -1,5 +1,6 @@
 "use client";
 
+import { addFilter, removeFilter } from "@/redux/api/product/productSlice";
 import { useAppDispatch } from "@/redux/hook";
 import { Add } from "@mui/icons-material";
 import { useEffect, useState } from "react";
@@ -10,7 +11,7 @@ const SideFilterSection = () => {
   return (
     <div className="w-full pr-2 lg:w-1/4 lg:block">
       <div className="p-4 mb-5 bg-white border border-[#f04336]">
-        <h2 className="text-2xl font-bold dark:text-gray-900">Species</h2>
+        <h2 className="text-2xl font-bold dark:text-gray-900">Category</h2>
         <div className="w-16 pb-2 mb-6 border-b-2 border-[#f04336] "></div>
         <ul>
           <li className="mb-4">
@@ -28,7 +29,7 @@ const SideFilterSection = () => {
                 // }
                 type="checkbox"
                 className="w-4 h-4 mr-2"
-                value="dog"
+                value="Prescription Drugs"
                 name="species"
               />
               <span className="text-lg">Dog</span>

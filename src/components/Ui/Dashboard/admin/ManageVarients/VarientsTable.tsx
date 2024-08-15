@@ -128,6 +128,12 @@ const VarientsTable = () => {
             rows={rowsData}
             columns={columns}
             rowHeight={100}
+            initialState={{
+              pagination: {
+                paginationModel: { page: 0, pageSize: 5 },
+              },
+            }}
+            pageSizeOptions={[5, 10]}
             sx={{
               "& .MuiDataGrid-row": {
                 cursor: "pointer",

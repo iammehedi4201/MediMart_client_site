@@ -200,15 +200,7 @@ const Navbar = () => {
                   Products
                 </Link>
               </li>
-
-              <li>
-                <Link
-                  href="/aboutUs"
-                  className="block py-2 pl-3 pr-4 text-black   hover:text-orange-500 "
-                >
-                  About Us
-                </Link>
-              </li>
+            
 
               {userInfo && (
                 <li>

@@ -1,7 +1,6 @@
 "use client";
 
 import SectionHeader from "@/components/Shared/SectionHeader/SectionHeader";
-import PetViewModal from "@/components/Ui/PetViewModal/PetViewModal";
 import {
   useDeleteProductByIdMutation,
   useGetAllProductsQuery,
